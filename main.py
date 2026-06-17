@@ -1,4 +1,5 @@
 import numpy as np
+
 def preprocess_text(file_path) -> list[str]:
     with open(file_path, "r", encoding="utf-8") as file:
         lines = file.readlines()
@@ -56,5 +57,4 @@ def tf_idf (word: str, clean_line: list, counted_line: list) -> list:
 file_path = r".\word_suggestion\data.txt"
 clean_lines = preprocess_text(file_path)
 list_count_word = count_word(clean_lines)
-
-print(tf_idf('he', clean_lines, list_count_word))
+print(tf_idf('received', clean_lines, list_count_word))

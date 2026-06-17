@@ -32,11 +32,14 @@ def inverse_doc_frequency (word: str, preprocessed_lines: list) -> float:
     result = np.log(len(preprocessed_lines) / contained_word)
     return result
 
-def term_frequency (word: str, words: list) -> float:
+def term_frequency (word: str, list_count_word: list) -> list:
     '''TF = (Number of times the term appears in the document) / (Total number of terms in the document)'''
-    counter_words = count_word(words)
-    num_word = count_word.get(word,0)
-    tf_word = num_word/len(counter_words)
+    tf_word = []
+    for line in list_count_word:
+        num_word = line.get(word,0)
+        num_word_line = [ i for _,i in line.items()]
+        tf_line = num_word /sum(num_word_line)
+        tf_word.append(tf_line)
     return tf_word
 
 def tf_idf (word: str, data: list) -> dict:
@@ -50,5 +53,5 @@ def tf_idf (word: str, data: list) -> dict:
 #===================MAIN======================================
 file_path = r".\word_suggestion\data.txt"
 clean_lines = preprocess_text(file_path)
-print(inverse_doc_frequency("this",clean_lines))
-    #print(inverse_doc_frequency(r"the",clean_text))
+list_count_word = count_word(clean_lines)
+print(term_frequency("the", list_count_word))

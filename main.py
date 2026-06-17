@@ -63,7 +63,12 @@ def suggested_line (word: str, cleaned_list: list, counted_list: list) -> str:
 def suggest_word (word: str, suggest_line: str):
     print(suggest_line)
     for index, value in enumerate(suggest_line):
-        if value == word: print(suggest_line[index + 1])
+        if value == word: 
+            if index == len(suggest_line) - 1:
+                print(suggest_line[index])
+            else:
+                print(suggest_line[index + 1])
+
 
 
 

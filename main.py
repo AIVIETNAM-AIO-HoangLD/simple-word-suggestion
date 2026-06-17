@@ -4,7 +4,7 @@ def preprocess_text(file_path) -> list[str]:
         lines = file.readlines()
         clean_lines = []
         for line in lines:
-            preprocessed_line = line.replace(",", " ").replace("."," ").replace("(", " ").replace(")", " ")
+            preprocessed_line = line.replace(",", " ").replace("."," ").replace("(", " ").replace(")", " ").replace("-","")
             preprocessed_line = preprocessed_line.lower().split()
             clean_lines.append(preprocessed_line)
     return clean_lines
@@ -42,16 +42,19 @@ def term_frequency (word: str, list_count_word: list) -> list:
         tf_word.append(tf_line)
     return tf_word
 
-def tf_idf (word: str, data: list) -> dict:
-    tf_idf_word = {}
-    idf = inverse_doc_frequency(word, data)
-    for words in data:
-        tf_idf_word[word] = term_frequency(word, words) * idf
-    return tf_idf
+def tf_idf (word: str, clean_line: list, counted_line: list) -> list:
+    tf = np.array(term_frequency(word, counted_line))
+    idf = inverse_doc_frequency(word, clean_line)
+    #print(f"TF: {tf}")
+    #print(f"IDF: {idf}")
+    tf_idf = tf * idf
+    tf_idf_list = tf_idf.tolist()
+    return tf_idf_list
 
 
 #===================MAIN======================================
 file_path = r".\word_suggestion\data.txt"
 clean_lines = preprocess_text(file_path)
 list_count_word = count_word(clean_lines)
-print(term_frequency("the", list_count_word))
+
+print(tf_idf('he', clean_lines, list_count_word))

@@ -63,11 +63,7 @@ def suggested_line (word: str, cleaned_list: list, counted_list: list) -> str:
 def suggest_word (word: str, suggest_line: str):
     print(suggest_line)
     for index, value in enumerate(suggest_line):
-        if value == word and index < len(suggest_line) - 1:
-            print(suggest_line[index + 1])
-            break
-        else: 
-            print(suggest_line[len(suggest_line) - 1])
+        if value == word: print(suggest_line[index + 1])
 
 
 
@@ -75,7 +71,7 @@ def suggest_word (word: str, suggest_line: str):
 file_path = r".\word_suggestion\data.txt"
 clean_lines = preprocess_text(file_path)
 count_list = count_word(clean_lines)
-current_word =  input()
+current_word =  input("The current word: ")
 predict_line = suggested_line(current_word, clean_lines, count_list)
 suggest_word(current_word,predict_line)
 

@@ -52,25 +52,30 @@ def tf_idf (word: str, clean_line: list, counted_line: list) -> list:
     tf_idf_list = tf_idf.tolist()
     return tf_idf_list
 
-def suggested_line (word: str, cleaned_list: list, counted_list: list, data: list) -> str:
+def suggested_line (word: str, cleaned_list: list, counted_list: list) -> str:
     tf_idf_list = tf_idf(word, cleaned_list, counted_list)
     max = 0
     idx_max = -1
     for idx, value in enumerate(tf_idf_list):
-        if value > max: 
-            idx_max = idx
-            max = value
-    print(max)
-    print(idx_max)
-    print(data[idx_max])
-    print(tf_idf_list)
+        if value > max: idx_max = idx
+    return cleaned_list[idx_max]
+
+def suggest_word (word: str, suggest_line: str):
+    print(suggest_line)
+    for index, value in enumerate(suggest_line):
+        if value == word and index < len(suggest_line) - 1:
+            print(suggest_line[index + 1])
+            break
+        else: 
+            print(suggest_line[len(suggest_line) - 1])
 
 
 
 #===================MAIN======================================
 file_path = r".\word_suggestion\data.txt"
 clean_lines = preprocess_text(file_path)
-counted_list = count_word(clean_lines)
-with open(file_path, "r", encoding="utf-8") as file:
-    lines = file.readlines()
-    suggested_line('boiling',clean_lines,counted_list, lines)
+count_list = count_word(clean_lines)
+current_word =  input()
+predict_line = suggested_line(current_word, clean_lines, count_list)
+suggest_word(current_word,predict_line)
+

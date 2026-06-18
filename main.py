@@ -73,7 +73,7 @@ def suggest_word (word: str, suggest_line: str):
 
 
 #===================MAIN======================================
-file_path = r".\word_suggestion\data.txt"
+file_path = r"/home/hoangLD/Desktop/AIVIETNAM/M01W03/simple-word-suggestion/data.txt"
 clean_lines = preprocess_text(file_path)
 count_list = count_word(clean_lines)
 current_word =  input("The current word: ")

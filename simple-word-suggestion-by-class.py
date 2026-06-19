@@ -16,7 +16,7 @@ class Tf_Idf:
         for self._line in self._clean_lines:
             self._preprocessed_line = self._line.replace(",", " ").replace("."," ").replace("(", " ").replace(")", " ").replace("-","")
             self._preprocessed_line  = self._preprocessed_line.lower().split()
-        self._preprocessed_lines.append(self._preprocessed_line)
+            self._preprocessed_lines.append(self._preprocessed_line)
         return self._preprocessed_lines
     
     def count_words_in_lines (self):
@@ -55,7 +55,7 @@ class Tf_Idf:
         return self._tf_idf
     
 test = Tf_Idf()
-with open(r"/home/hoangLD/Desktop/AIVIETNAM/M01W03/simple-word-suggestion/data.txt", "r", encoding="utf-8") as file:
+with open("./data.txt", "r", encoding="utf-8") as file:
     lines = file.readlines()
     test.get_clean_lines(lines)
     test.get_word("the")

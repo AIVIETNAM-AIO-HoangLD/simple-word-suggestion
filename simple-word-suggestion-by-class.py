@@ -54,15 +54,19 @@ class Tf_Idf:
         self._tf_idf = np.array(self.term_freq()) * self.inverse_doc_freq()
         return self._tf_idf
     
+    def __call__ (self):
+        self.preprocess_lines()
+        self.count_words_in_lines()
+        self.inverse_doc_freq()
+        self.term_freq()
+        self.tf_idf_calculate()
+    
 test = Tf_Idf()
 with open("./data.txt", "r", encoding="utf-8") as file:
     lines = file.readlines()
     test.get_clean_lines(lines)
     test.get_word("the")
-    test.preprocess_lines()
-    test.count_words_in_lines()
-    test.inverse_doc_freq()
-    test.term_freq()
+    test()
     print(test.tf_idf_calculate())
 
 

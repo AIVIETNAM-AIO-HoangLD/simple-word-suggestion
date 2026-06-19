@@ -60,6 +60,18 @@ class Tf_Idf:
         self.inverse_doc_freq()
         self.term_freq()
         self.tf_idf_calculate()
+class Suggested_Word (Tf_Idf):
+    def __init__ (self):
+        super.__init__(self)
+    
+    def get_clean_lines(self, clean_lines):
+        super().get_clean_lines(clean_lines)
+    
+    def get_word(self, word):
+        super().get_word(word)
+    
+    def 
+
     
 test = Tf_Idf()
 with open("./data.txt", "r", encoding="utf-8") as file:

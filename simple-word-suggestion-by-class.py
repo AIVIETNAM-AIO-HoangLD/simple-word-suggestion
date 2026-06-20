@@ -4,6 +4,10 @@ class Tf_Idf:
     def __init__(self):
         self._clean_lines = []
         self._word = ""
+        self._preprocessed_lines = []
+        self._countered_lines = []
+        self.contained_word = 0
+        self._tf_word = []
     
     def get_clean_lines(self, clean_lines):
         self._clean_lines = clean_lines
@@ -12,7 +16,6 @@ class Tf_Idf:
         self._word = word
 
     def preprocess_lines (self):
-        self._preprocessed_lines = []
         for self._line in self._clean_lines:
             self._preprocessed_line = self._line.replace(",", " ").replace("."," ").replace("(", " ").replace(")", " ").replace("-","")
             self._preprocessed_line  = self._preprocessed_line.lower().split()
@@ -20,7 +23,6 @@ class Tf_Idf:
         return self._preprocessed_lines
     
     def count_words_in_lines (self):
-        self._countered_lines = []
         for self.c_line in self._preprocessed_lines:
             self._countered_line = {}
             for self._word in self.c_line:
@@ -32,7 +34,6 @@ class Tf_Idf:
         return self._countered_lines
 
     def inverse_doc_freq (self):
-        self.contained_word = 0
         for self._idf_line in self._preprocessed_lines:
             if self._word in self._idf_line:
                 self.contained_word +=1
@@ -42,7 +43,6 @@ class Tf_Idf:
         return self.idf
     
     def term_freq (self):
-        self._tf_word = []
         for self._tf_line in self._countered_lines:
             self.__num_word = self._tf_line.get(self._word,0)
             self.__num_word_line = [i for _,i in self._tf_line.items()]
@@ -60,17 +60,11 @@ class Tf_Idf:
         self.inverse_doc_freq()
         self.term_freq()
         self.tf_idf_calculate()
+    
 class Suggested_Word (Tf_Idf):
     def __init__ (self):
         super.__init__(self)
-    
-    def get_clean_lines(self, clean_lines):
-        super().get_clean_lines(clean_lines)
-    
-    def get_word(self, word):
-        super().get_word(word)
-    
-    def 
+
 
     
 test = Tf_Idf()
@@ -79,7 +73,7 @@ with open("./data.txt", "r", encoding="utf-8") as file:
     test.get_clean_lines(lines)
     test.get_word("the")
     test()
-    print(test.tf_idf_calculate())
+    print(test.term_freq())
 
 
 
